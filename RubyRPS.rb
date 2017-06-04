@@ -8,7 +8,7 @@ puts "0:グー\n1:チョキ\n2:パー\n"
 player = 4
 while player > 3 do
     player = gets.to_i
-    if player > 3 then
+    if player > 3 || integer_string?(player)==false then
         puts "それは受け付けんぞ！もっかいじゃ"
         puts "最初はグー！じゃんけん..."
     end
