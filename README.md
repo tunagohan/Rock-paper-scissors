@@ -4,7 +4,7 @@
 
 ### 開発環境
 - Ruby 
-- Python　(未)
+- Python
 - Go　(未)
 - Java　(未)
 - Javascript　(未)
