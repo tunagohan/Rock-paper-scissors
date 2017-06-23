@@ -12,10 +12,9 @@ import (
 )
 
 var (
-	cpuHand    int = 0
-	playerHand int = 0
-	result     int = 0
-	janken         = [4]string{"Retry", "グー", "チョキ", "パー"}
+	cpuHand    int
+	playerHand int
+	result     int
 )
 
 func inputs() (stringInput string) {
@@ -54,6 +53,7 @@ func rpsjudge() {
 }
 
 func main() {
+	janken := [4]string{"Retry", "グー", "チョキ", "パー"}
 	printmessage()
 	//擬似乱数
 	rand.Seed(time.Now().UnixNano())
@@ -62,7 +62,7 @@ func main() {
 	for playerHand == 0 {
 		input, err := converting()
 		if err != nil {
-			log.Println("不正な文字: ")
+			log.Println("不正な文字")
 		}
 		playerHand = input
 	}
@@ -81,7 +81,7 @@ func main() {
 			//input(int)
 			input, err := converting()
 			if err != nil {
-				log.Println("不正な文字: ")
+				log.Println("不正な文字")
 
 			}
 			playerHand = input
