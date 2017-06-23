@@ -18,29 +18,11 @@ var (
 	jdg	int
 )
 
-func inputs() (stringInput string) {
-	scanner := bufio.NewScanner(os.Stdin)
-	scanner.Scan()
-	stringInput = scanner.Text()
-	stringInput = strings.TrimSpace(stringInput)
-	return
-}
-
-func converting() (int, error) {
-	stringInput := inputs()
-	return strconv.Atoi(strings.TrimSpace(stringInput))
-}
-
-func printmessage() {
-	fmt.Println("じゃんけんゲームへようこそ")
-	fmt.Println("じゃんけんの手は")
-	fmt.Print("1:グー\n2:チョキ\n3:パー\nとなります\n")
-}
-
 func main() {
 	printMessage()
 	//擬似乱数
 	rand.Seed(time.Now().UnixNano())
+
 	janken := [4]string{"Retry", "グー", "チョキ", "パー"}
 
 	for try == 0 {
