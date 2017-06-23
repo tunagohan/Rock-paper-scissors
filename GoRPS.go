@@ -12,10 +12,10 @@ import (
 )
 
 var (
-	cpuHand    int
-	playerHand int
-	retry      int
-	judge      int
+	cpu	int
+	ply	int
+	try	int
+	jdg	int
 )
 
 func inputs() (stringInput string) {
@@ -38,34 +38,35 @@ func printmessage() {
 }
 
 func main() {
-	printmessage()
+	printMessage()
 	//擬似乱数
 	rand.Seed(time.Now().UnixNano())
 	janken := [4]string{"Retry", "グー", "チョキ", "パー"}
-	for retry == 0 {
+
+	for try == 0 {
 		fmt.Println("最初はグーじゃんけん...")
 		//input(int)
-		playerHand, err := converting()
+		ply, err := convertInput()
 		if err != nil {
 			log.Println("『ちょおまwwwそういうのやめてーやww!』: ")
 		}
 		//CPUに擬似乱数を設定
-		cpuHand = rand.Intn(3) + 1
+		cpu = rand.Intn(3) + 1
 		//自分-CPU
-		judge = playerHand - cpuHand
+		jdg = ply - cpu
 		//判定
 		fmt.Printf("プレイヤー:%s\nCPU:%s\n", janken[playerHand], janken[cpuHand])
 		//あいこになったら
-		for judge == 0 {
+		for jdg == 0 {
 			fmt.Println("あいこで…")
-			playerHand, err := converting()
+			ply, err := convertInput()
 			if err != nil {
 				log.Println("『ちょおまwwwそういうのやめてーやww!』: ")
 			}
 			//CPUに擬似乱数を設定
-			cpuHand = rand.Intn(2) + 1
+			cpu = rand.Intn(2) + 1
 			//自分-CPU
-			judge = playerHand - cpuHand
+			jdg = ply - cpu
 			//判定
 			fmt.Printf("プレイヤー:%s\nCPU:%s\n", janken[playerHand], janken[cpuHand])
 		}
