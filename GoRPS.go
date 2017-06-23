@@ -62,7 +62,7 @@ func main() {
 	for playerHand == 0 {
 		input, err := converting()
 		if err != nil {
-			log.Println("Input Error: ")
+			log.Println("不正な文字: ")
 		}
 		playerHand = input
 	}
@@ -81,7 +81,8 @@ func main() {
 			//input(int)
 			input, err := converting()
 			if err != nil {
-				log.Println("Input Error: ")
+				log.Println("不正な文字: ")
+
 			}
 			playerHand = input
 		}
