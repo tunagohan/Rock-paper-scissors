@@ -14,8 +14,7 @@ import (
 var (
 	cpuHand    int
 	playerHand int
-	retry      int
-	judge      int
+	result     int
 )
 
 func inputs() (stringInput string) {
@@ -32,59 +31,70 @@ func converting() (int, error) {
 }
 
 func printmessage() {
+	fmt.Println("*-----------------------*")
 	fmt.Println("じゃんけんゲームへようこそ")
-	fmt.Println("じゃんけんの手は")
-	fmt.Print("1:グー\n2:チョキ\n3:パー\nとなります\n")
+	fmt.Println("じゃんけんの手")
+	fmt.Println("1: グーー")
+	fmt.Println("2: チョキ")
+	fmt.Println("3: パーー")
+	fmt.Println("*-----------------------*")
+}
+
+//判定
+func rpsjudge() {
+	if result == -1 || result == 2 {
+		fmt.Println("【勝ち】")
+	}
+	//負け
+	if result == -2 || result == 1 {
+		fmt.Println("【負け】")
+	}
+	return
 }
 
 func main() {
+	janken := [4]string{"Retry", "グー", "チョキ", "パー"}
 	printmessage()
 	//擬似乱数
 	rand.Seed(time.Now().UnixNano())
-	janken := [4]string{"Retry", "グー", "チョキ", "パー"}
-	for retry == 0 {
-		fmt.Println("最初はグーじゃんけん...")
-		//input(int)
-		playerHand, err := converting()
+	fmt.Println("最初はグーじゃんけん...")
+	fmt.Print(">>> ")
+	for playerHand == 0 {
+		input, err := converting()
 		if err != nil {
-			log.Println("『ちょおまwwwそういうのやめてーやww!』: ")
+			log.Println("不正な文字")
+		}
+		playerHand = input
+	}
+	//CPUに擬似乱数を設定
+	cpuHand = rand.Intn(3) + 1
+	//自分-CPU
+	result = playerHand - cpuHand
+	//結果
+	fmt.Printf("Player:%s\nCPU:%s\n", janken[playerHand], janken[cpuHand])
+	fmt.Println("*-----------------------*")
+	for result == 0 {
+		playerHand = 0
+		fmt.Println("あいこで...")
+		fmt.Print(">>> ")
+		for playerHand == 0 {
+			//input(int)
+			input, err := converting()
+			if err != nil {
+				log.Println("不正な文字")
+
+			}
+			playerHand = input
 		}
 		//CPUに擬似乱数を設定
 		cpuHand = rand.Intn(3) + 1
 		//自分-CPU
-		judge = playerHand - cpuHand
-		//判定
-		fmt.Printf("プレイヤー:%s\nCPU:%s\n", janken[playerHand], janken[cpuHand])
-		//あいこになったら
-		for judge == 0 {
-			fmt.Println("あいこで…")
-			playerHand, err := converting()
-			if err != nil {
-				log.Println("『ちょおまwwwそういうのやめてーやww!』: ")
-			}
-			//CPUに擬似乱数を設定
-			cpuHand = rand.Intn(2) + 1
-			//自分-CPU
-			judge = playerHand - cpuHand
-			//判定
-			fmt.Printf("プレイヤー:%s\nCPU:%s\n", janken[playerHand], janken[cpuHand])
-		}
-		//勝ち
-		if judge == -1 || judge == 2 {
-			fmt.Println("WIN")
-		}
-		//負け
-		if judge == -2 || judge == 1 {
-			fmt.Println("LOSE")
-		}
-		//コンテニューアクション
-		fmt.Println("続けるかい？")
-		fmt.Print("0:続ける\n1:やめる\n")
-		playerretry, err := converting()
-		if err != nil {
-			log.Println("『ちょおまwwwそういうのやめてーやww!』: ")
-		}
-		retry = playerretry
+		result = playerHand - cpuHand
+		fmt.Printf("Player:%s\nCPU:%s\n", janken[playerHand], janken[cpuHand])
 	}
+	rpsjudge()
+
+	fmt.Println("*----------------------------------------*")
 	fmt.Println("遊んでくれてありがとう＼＼\\٩( 'ω' )و //／／")
+	fmt.Println("*----------------------------------------*")
 }
