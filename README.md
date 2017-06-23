@@ -5,7 +5,7 @@
 ### 開発環境
 - Ruby 
 - Python
-- Go　(未)
+- Go
 - Java　(未)
 - Javascript　(未)
 - SlackBot(nodejs)　(未)
